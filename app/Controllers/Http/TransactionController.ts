@@ -47,7 +47,7 @@ export default class TransactionController {
       // JWTService.loadJWT()
       // return frelais
       
-      return {"hello": "hello"}
+      return {"status": "ok"}
     }
 
     public async moyensPaiements(){
@@ -130,7 +130,9 @@ export default class TransactionController {
 
 
               
-        return {"message": "Transaction ok"}
+        return {"message": "Transaction ok",
+                "payment_link": semoaAns.bill_url
+            }
               
            
 
