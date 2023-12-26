@@ -1,9 +1,9 @@
-import axios from 'axios'
+
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import JWTService from 'App/Services/JWTService'
+
 import FirebaseService from 'App/Services/FirebaseService'
-import { doc, getDoc, collection , getDocs,updateDoc, orderBy, query,addDoc} from 'firebase/firestore'
-import Env from '@ioc:Adonis/Core/Env'
+import { doc, collection ,updateDoc,addDoc} from 'firebase/firestore'
+
 import SemoaService from 'App/Services/SemoaService'
 
 export default class TransactionController {

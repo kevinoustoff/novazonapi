@@ -1,7 +1,6 @@
 import axios from 'axios'
 import Env from '@ioc:Adonis/Core/Env'
 import JWTService from './JWTService'
-import { FirebaseError } from 'firebase/app'
 
 export default class SemoaService{
     constructor(){

@@ -1,5 +1,4 @@
-import axios from 'axios'
-import Env from '@ioc:Adonis/Core/Env'
+
 export default class JWTService{
 
 
