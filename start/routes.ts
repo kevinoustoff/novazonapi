@@ -24,12 +24,12 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-Route.post('/auth', async (ctx) => {
-  return new TransactionController().index(ctx)
+Route.post('/auth', async () => {
+  return new TransactionController().index()
 })
 
-Route.get('/moyens_paiements', async (ctx) => {
-  return new TransactionController().moyensPaiements(ctx)
+Route.get('/moyens_paiements', async () => {
+  return new TransactionController().moyensPaiements()
 })
 
 Route.post('/transactions/create', async (ctx) => {

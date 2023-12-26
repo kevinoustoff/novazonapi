@@ -8,7 +8,7 @@ import SemoaService from 'App/Services/SemoaService'
 import SemoaServiceTransac from 'App/Interfaces/SemoaCreateTransac';
 
 export default class TransactionController {
-    public async index(ctx: HttpContextContract) {
+    public async index() {
         let semoa = new SemoaService();
 
         semoa.auth()
@@ -50,7 +50,7 @@ export default class TransactionController {
       return {"hello": "hello"}
     }
 
-    public async moyensPaiements(ctx: HttpContextContract){
+    public async moyensPaiements(){
       let semoa = new SemoaService();
 
       let moyensPaieme =  await semoa.moyensDePaiement()
