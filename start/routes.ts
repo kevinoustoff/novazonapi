@@ -19,11 +19,6 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
-import axios from 'axios'
-import JWTService from 'App/Services/JWTService'
-import FirebaseService from 'App/Services/FirebaseService'
-import { doc, getDoc, collection , getDocs,updateDoc, orderBy, query} from 'firebase/firestore'
-import Env from '@ioc:Adonis/Core/Env'
 import TransactionController from 'App/Controllers/Http/TransactionController'
 Route.get('/', async () => {
   return { hello: 'world' }
