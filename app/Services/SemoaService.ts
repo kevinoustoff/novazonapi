@@ -3,6 +3,11 @@ import Env from '@ioc:Adonis/Core/Env'
 import JWTService from './JWTService'
 
 export default class SemoaService{
+    private password;
+    private client_id;
+    private client_secret
+    private username
+    
     constructor(){
         this.password = Env.get('SEMOA_PASSWORD')
         this.client_id = Env.get('SEMOA_CLIENT_ID')
