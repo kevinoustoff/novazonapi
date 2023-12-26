@@ -46,3 +46,149 @@ Before we get started, keep in mind:
 [info] will contain Hosting assets to be uploaded with firebase deploy. If you
 [info] have a build process for your assets, use your build's output directory.
 [info] 
+[debug] [2023-12-23T12:17:41.366Z] ----------------------------------------------------------------------
+[debug] [2023-12-23T12:17:41.372Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\USER\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js logout
+[debug] [2023-12-23T12:17:41.373Z] CLI Version:   12.4.8
+[debug] [2023-12-23T12:17:41.374Z] Platform:      win32
+[debug] [2023-12-23T12:17:41.374Z] Node Version:  v18.12.1
+[debug] [2023-12-23T12:17:41.377Z] Time:          Sat Dec 23 2023 13:17:41 GMT+0100 (heure normale d’Europe centrale)
+[debug] [2023-12-23T12:17:41.378Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-12-23T12:17:41.388Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2023-12-23T12:17:41.601Z] >>> [apiv2][query] GET https://accounts.google.com/o/oauth2/revoke token=1%2F%2F037zHslap05QTCgYIARAAGAMSNgF-L9IrxUMIsN69kg2MdcWGkPhEfTGfuRoWdzG_YPh4curzbz5ZB8v9GoXG7UvJ3fxrk10Ycw
+[debug] [2023-12-23T12:17:41.858Z] <<< [apiv2][status] GET https://accounts.google.com/o/oauth2/revoke 200
+[debug] [2023-12-23T12:17:59.902Z] ----------------------------------------------------------------------
+[debug] [2023-12-23T12:17:59.909Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\USER\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js login
+[debug] [2023-12-23T12:17:59.911Z] CLI Version:   12.4.8
+[debug] [2023-12-23T12:17:59.911Z] Platform:      win32
+[debug] [2023-12-23T12:17:59.912Z] Node Version:  v18.12.1
+[debug] [2023-12-23T12:17:59.927Z] Time:          Sat Dec 23 2023 13:17:59 GMT+0100 (heure normale d’Europe centrale)
+[debug] [2023-12-23T12:17:59.927Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-12-23T12:17:59.937Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[info] i  Firebase optionally collects CLI and Emulator Suite usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you.
+ 
+[debug] [2023-12-23T12:18:00.658Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2023-12-23T12:18:00.663Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[info] i  To change your data collection preference at any time, run `firebase logout` and log in again. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=217888595&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
+[debug] [2023-12-23T12:18:58.231Z] >>> [apiv2][query] POST https://accounts.google.com/o/oauth2/token [none]
+[debug] [2023-12-23T12:18:58.234Z] >>> [apiv2][body] POST https://accounts.google.com/o/oauth2/token [omitted]
+[debug] [2023-12-23T12:18:58.427Z] <<< [apiv2][status] POST https://accounts.google.com/o/oauth2/token 200
+[debug] [2023-12-23T12:18:58.428Z] <<< [apiv2][body] POST https://accounts.google.com/o/oauth2/token [omitted]
+[info] 
+[info] +  Success! Logged in as kevin.toffa@zurymarket.com 
+[debug] [2023-12-23T12:19:24.728Z] ----------------------------------------------------------------------
+[debug] [2023-12-23T12:19:24.733Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\USER\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2023-12-23T12:19:24.734Z] CLI Version:   12.4.8
+[debug] [2023-12-23T12:19:24.735Z] Platform:      win32
+[debug] [2023-12-23T12:19:24.735Z] Node Version:  v18.12.1
+[debug] [2023-12-23T12:19:24.737Z] Time:          Sat Dec 23 2023 13:19:24 GMT+0100 (heure normale d’Europe centrale)
+[debug] [2023-12-23T12:19:24.738Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-12-23T12:19:24.755Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-12-23T12:19:24.759Z] > authorizing via signed-in user (kevin.toffa@zurymarket.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\novazon-api\nvz-apis
+
+Before we get started, keep in mind:
+
+  * You are currently outside your home directory
+
+[error] 
+[error] Error: Must select at least one feature. Use SPACEBAR to select features, or specify a feature by running firebase init [feature_name]
+[debug] [2023-12-23T12:19:47.957Z] ----------------------------------------------------------------------
+[debug] [2023-12-23T12:19:47.975Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\USER\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2023-12-23T12:19:47.979Z] CLI Version:   12.4.8
+[debug] [2023-12-23T12:19:47.982Z] Platform:      win32
+[debug] [2023-12-23T12:19:47.984Z] Node Version:  v18.12.1
+[debug] [2023-12-23T12:19:47.991Z] Time:          Sat Dec 23 2023 13:19:47 GMT+0100 (heure normale d’Europe centrale)
+[debug] [2023-12-23T12:19:47.992Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-12-23T12:19:48.022Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-12-23T12:19:48.030Z] > authorizing via signed-in user (kevin.toffa@zurymarket.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\novazon-api\nvz-apis
+
+Before we get started, keep in mind:
+
+  * You are currently outside your home directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2023-12-23T12:20:04.842Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2023-12-23T12:20:05.581Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2023-12-23T12:20:05.582Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project nova-b6a7f (Nova) 
+[info] 
+=== Firestore Setup
+[debug] [2023-12-23T12:20:59.915Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/nova-b6a7f/services/firestore.googleapis.com [none]
+[debug] [2023-12-23T12:20:59.916Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/nova-b6a7f/services/firestore.googleapis.com x-goog-quota-user=projects/nova-b6a7f
+[debug] [2023-12-23T12:21:00.938Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/nova-b6a7f/services/firestore.googleapis.com 200
+[debug] [2023-12-23T12:21:00.940Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/nova-b6a7f/services/firestore.googleapis.com [omitted]
+[debug] [2023-12-23T12:21:00.945Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/nova-b6a7f/databases/(default) [none]
+[debug] [2023-12-23T12:21:01.287Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/nova-b6a7f/databases/(default) 200
+[debug] [2023-12-23T12:21:01.289Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/nova-b6a7f/databases/(default) {"name":"projects/nova-b6a7f/databases/(default)","uid":"076b504c-832c-4c62-8780-52b3b67be2d7","createTime":"2023-07-04T21:36:15.243676Z","updateTime":"2023-07-04T21:36:15.243676Z","locationId":"eur3","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2023-12-23T11:21:01.510380Z","appEngineIntegrationMode":"DISABLED","keyPrefix":"e","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","etag":"IOuXru3FpYMDMNCg04qC94ID"}
+[debug] [2023-12-23T12:21:01.291Z] database_type: FIRESTORE_NATIVE
+[debug] [2023-12-23T12:21:01.294Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-12-23T12:21:01.296Z] > authorizing via signed-in user (kevin.toffa@zurymarket.com)
+[debug] [2023-12-23T12:21:01.298Z] [iam] checking project nova-b6a7f for permissions ["firebase.projects.get"]
+[debug] [2023-12-23T12:21:01.303Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/nova-b6a7f:testIamPermissions [none]
+[debug] [2023-12-23T12:21:01.305Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/nova-b6a7f:testIamPermissions x-goog-quota-user=projects/nova-b6a7f
+[debug] [2023-12-23T12:21:01.306Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/nova-b6a7f:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-12-23T12:21:02.306Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/nova-b6a7f:testIamPermissions 200
+[debug] [2023-12-23T12:21:02.309Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/nova-b6a7f:testIamPermissions {"permissions":["firebase.projects.get"]}
+[info] 
+[info] Firestore Security Rules allow you to define how and when to allow
+[info] requests. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2023-12-23T12:21:12.725Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/nova-b6a7f/releases pageSize=10&pageToken=
+[debug] [2023-12-23T12:21:13.599Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/nova-b6a7f/releases 200
+[debug] [2023-12-23T12:21:13.600Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/nova-b6a7f/releases {"releases":[{"name":"projects/nova-b6a7f/releases/cloud.firestore","rulesetName":"projects/nova-b6a7f/rulesets/bc59ef38-3372-46b6-954d-2dce026ce2c6","createTime":"2023-07-04T21:36:22.173491Z","updateTime":"2023-08-23T14:19:00.355208Z"},{"name":"projects/nova-b6a7f/releases/firebase.storage/nova-b6a7f.appspot.com","rulesetName":"projects/nova-b6a7f/rulesets/7699d435-fc0c-4849-90f9-baf06a3af0db","createTime":"2023-07-10T19:42:51.201105Z","updateTime":"2023-08-03T12:18:55.075964Z"}]}
+[debug] [2023-12-23T12:21:13.714Z] Found ruleset: projects/nova-b6a7f/rulesets/bc59ef38-3372-46b6-954d-2dce026ce2c6
+[debug] [2023-12-23T12:21:13.716Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/nova-b6a7f/rulesets/bc59ef38-3372-46b6-954d-2dce026ce2c6 [none]
+[debug] [2023-12-23T12:21:14.494Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/nova-b6a7f/rulesets/bc59ef38-3372-46b6-954d-2dce026ce2c6 200
+[debug] [2023-12-23T12:21:14.495Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/nova-b6a7f/rulesets/bc59ef38-3372-46b6-954d-2dce026ce2c6 [omitted]
+[info] 
+[info] Firestore indexes allow you to perform complex queries while
+[info] maintaining performance that scales with the size of the result
+[info] set. You can keep index definitions in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2023-12-23T12:21:20.872Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/nova-b6a7f/databases/(default)/collectionGroups/-/indexes [none]
+[debug] [2023-12-23T12:21:20.878Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/nova-b6a7f/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* [none]
+[debug] [2023-12-23T12:21:21.145Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/nova-b6a7f/databases/(default)/collectionGroups/-/indexes 200
+[debug] [2023-12-23T12:21:21.146Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/nova-b6a7f/databases/(default)/collectionGroups/-/indexes {"indexes":[{"name":"projects/nova-b6a7f/databases/(default)/collectionGroups/Commandes/indexes/CICAgJim14AK","queryScope":"COLLECTION","fields":[{"fieldPath":"etat","order":"ASCENDING"},{"fieldPath":"username","order":"ASCENDING"},{"fieldPath":"dateOfCommand","order":"ASCENDING"},{"fieldPath":"__name__","order":"ASCENDING"}],"state":"READY"},{"name":"projects/nova-b6a7f/databases/(default)/collectionGroups/Commandes/indexes/CICAgJiUpoMK","queryScope":"COLLECTION","fields":[{"fieldPath":"sellers","arrayConfig":"CONTAINS"},{"fieldPath":"dateofCommand","order":"DESCENDING"},{"fieldPath":"__name__","order":"DESCENDING"}],"state":"READY"},{"name":"projects/nova-b6a7f/databases/(default)/collectionGroups/GiftCards/indexes/CICAgJiUsZIK","queryScope":"COLLECTION","fields":[{"fieldPath":"recipientEmail","order":"ASCENDING"},{"fieldPath":"deliveryDate","order":"ASCENDING"},{"fieldPath":"__name__","order":"ASCENDING"}],"state":"READY"}]}
+[debug] [2023-12-23T12:21:21.164Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/nova-b6a7f/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* 200
+[debug] [2023-12-23T12:21:21.165Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/nova-b6a7f/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* {"fields":[{"name":"projects/nova-b6a7f/databases/(default)/collectionGroups/__default__/fields/*","indexConfig":{"indexes":[{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","order":"ASCENDING"}],"state":"READY"},{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","order":"DESCENDING"}],"state":"READY"},{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","arrayConfig":"CONTAINS"}],"state":"READY"}]}}]}
+[info] 
+[info] i  Writing configuration info to firebase.json... 
+[info] i  Writing project information to .firebaserc... 
+[info] 
+[info] +  Firebase initialization complete! 

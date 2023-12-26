@@ -1,0 +1,51 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "Commandes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "etat",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "username",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "dateOfCommand",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Commandes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "sellers",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "dateofCommand",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "GiftCards",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "recipientEmail",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "deliveryDate",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

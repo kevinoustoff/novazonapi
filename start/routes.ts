@@ -19,7 +19,25 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
-
+import axios from 'axios'
+import JWTService from 'App/Services/JWTService'
+import FirebaseService from 'App/Services/FirebaseService'
+import { doc, getDoc, collection , getDocs,updateDoc, orderBy, query} from 'firebase/firestore'
+import Env from '@ioc:Adonis/Core/Env'
+import TransactionController from 'App/Controllers/Http/TransactionController'
 Route.get('/', async () => {
   return { hello: 'world' }
 })
+
+Route.post('/auth', async (ctx) => {
+  return new TransactionController().index(ctx)
+})
+
+Route.get('/moyens_paiements', async (ctx) => {
+  return new TransactionController().moyensPaiements(ctx)
+})
+
+Route.post('/transactions/create', async (ctx) => {
+  return new TransactionController().sendPayment(ctx)
+})
+
