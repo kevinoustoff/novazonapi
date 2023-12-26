@@ -5,6 +5,7 @@ import FirebaseService from 'App/Services/FirebaseService'
 import { doc, collection ,updateDoc,addDoc} from 'firebase/firestore'
 
 import SemoaService from 'App/Services/SemoaService'
+import SemoaServiceTransac from 'App/Interfaces/SemoaCreateTransac';
 
 export default class TransactionController {
     public async index(ctx: HttpContextContract) {
@@ -105,9 +106,13 @@ export default class TransactionController {
 
         let semoa = new SemoaService();
 
-       let semoaAns= await semoa.createTransaction(
+        let sem;
+
+       sem = await semoa.createTransaction(
           dataSend
         );
+        let semoaAns = <SemoaServiceTransac>sem
+        
         const transacRef = doc(connector, "Transactions", res.id);
 
         console.log('semoaAns',semoaAns)
