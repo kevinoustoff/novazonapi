@@ -7,7 +7,7 @@ export default class SemoaService{
     private client_id;
     private client_secret
     private username
-    
+
     constructor(){
         this.password = Env.get('SEMOA_PASSWORD')
         this.client_id = Env.get('SEMOA_CLIENT_ID')
@@ -34,9 +34,12 @@ export default class SemoaService{
             });
             // Assuming response.data contains JWT data
             JWTService.loadJWT(response.data);
+
+            return response.data.access_token;
         }
         catch(error){
             console.error('Error occured:', error)
+            return 
         }
       
     }
@@ -47,7 +50,7 @@ export default class SemoaService{
         let url = `${Env.get('SEMOA_BASE_URL')}gateways`
         console.log(url)
         try{
-            let token = JWTService.readToken()
+            let token = await JWTService.readToken()
             console.log('ligne 47:', token)
             let response = await axios.get(url, {
                 headers: {
@@ -58,10 +61,10 @@ export default class SemoaService{
             pay = response.data
 
         } catch(error){
-            await this.auth();
-
+            let token=  await this.auth();
             
-            let token = JWTService.readToken()
+            
+            
             const response = await axios.get(url, {
                  headers: {
                      'Authorization': `Bearer ${token}`,
@@ -70,7 +73,17 @@ export default class SemoaService{
              });
             pay = response.data
             console.log(error)
-        } 
+        } finally{
+            let token = await JWTService.readToken()
+            
+            const response = await axios.get(url, {
+                 headers: {
+                     'Authorization': `Bearer ${token}`,
+                     'Content-Type':'application/json'
+                 },
+             });
+            pay = response.data
+        }
         console.log(pay)
         return pay
     }
@@ -92,17 +105,17 @@ export default class SemoaService{
             pay = response.data
 
         } catch(error){
-            await this.auth();
-            // let token = JWTService.readToken()
+            let token=  await this.auth();
             
-            // let response = await axios.post(url, data,{
-            //     headers: {
-            //         'Authorization': `Bearer ${token}`,
-            //         'Content-Type':'application/json'
-            //     },
-            // });
-            // pay = response.data
-            // console.log(error)
+            
+            let response = await axios.post(url, data,{
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type':'application/json'
+                },
+            });
+            pay = response.data
+            console.log(error)
             console.log(error)
         } 
         

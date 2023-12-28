@@ -99,7 +99,6 @@ export default class TransactionController {
             lastname:   data.client_lastname,
             phone:      data.client_phone
           }
-        
         }
 
         let res = await addDoc(collectionRef, data)
