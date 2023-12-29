@@ -17,7 +17,6 @@
 | import './routes/customer'
 |
 */
-
 import Route from '@ioc:Adonis/Core/Route'
 import TransactionController from 'App/Controllers/Http/TransactionController'
 Route.get('/', async () => {
