@@ -19,7 +19,6 @@
 */
 import Route from '@ioc:Adonis/Core/Route'
 import TransactionController from 'App/Controllers/Http/TransactionController'
-let hd;
 Route.get('/', async () => {
   return { hello: 'world' }
 })
