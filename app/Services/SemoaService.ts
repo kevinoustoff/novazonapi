@@ -94,7 +94,7 @@ export default class SemoaService{
         let url = `${Env.get('SEMOA_BASE_URL')}orders`
         
         try{
-            let token = JWTService.readToken()
+            let token = await JWTService.readToken()
             
             let response = await axios.post(url, data,{
                 headers: {
@@ -106,7 +106,7 @@ export default class SemoaService{
 
         } catch(error){
             let token=  await this.auth();
-            
+            console.log(error)
             
             let response = await axios.post(url, data,{
                 headers: {

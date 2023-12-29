@@ -122,16 +122,13 @@ export default class TransactionController {
           payment_methods: semoaAns.payments_method,
           code: semoaAns.code
         })
-
-       
-
-
-
-
               
-        return {"message": "Transaction ok",
-                "payment_link": semoaAns.bill_url
-            }
+        return {
+                "message": "Transaction ok",
+                "payment_link": semoaAns.bill_url,
+                "payment_action": semoaAns.payments_method[0].action,
+                "payment_method": semoaAns.payments_method[0].method
+              }
               
            
 
