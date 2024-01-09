@@ -35,3 +35,7 @@ Route.post('/transactions/create', async (ctx) => {
   return new TransactionController().sendPayment(ctx)
 })
 
+Route.post('/transactions/callback', async (ctx) => {
+  return new TransactionController().callback(ctx)
+})
+

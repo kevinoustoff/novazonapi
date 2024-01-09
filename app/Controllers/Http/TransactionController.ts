@@ -1,11 +1,12 @@
 
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-
+import Env from '@ioc:Adonis/Core/Env'
 import FirebaseService from 'App/Services/FirebaseService'
-import { doc, collection ,updateDoc,addDoc} from 'firebase/firestore'
+import { doc, collection ,updateDoc,addDoc, query,where,getDocs} from 'firebase/firestore'
 
 import SemoaService from 'App/Services/SemoaService'
 import SemoaServiceTransac from 'App/Interfaces/SemoaCreateTransac';
+import jsonwebtoken from'jsonwebtoken';
 
 export default class TransactionController {
     public async index() {
@@ -94,6 +95,7 @@ export default class TransactionController {
           merchant_reference :  data.command_id,
           amount : data.amount,
           gateway_id : data.gateway_id,
+          callback_url: Env.get('NOVAZON_API')+'/transactions/callback',
           client : {
             firstname : data.client_firstname,
             lastname:   data.client_lastname,
@@ -120,17 +122,60 @@ export default class TransactionController {
           bill_url: semoaAns.bill_url,
           payment_reference: semoaAns.merchant_reference,
           payment_methods: semoaAns.payments_method,
-          code: semoaAns.code
+          code: semoaAns.code,
+          payment_order_reference: semoaAns.order_reference
         })
               
         return {
                 "message": "Transaction ok",
                 "payment_link": semoaAns.bill_url,
                 "payment_action": semoaAns.payments_method[0].action,
-                "payment_method": semoaAns.payments_method[0].method
+                "payment_method": semoaAns.payments_method[0].method,
+                "payment_order_reference": semoaAns.order_reference
               }
-              
-           
+    }
+
+
+    public async callback(ctx: HttpContextContract){
+      const connector = FirebaseService.connector();
+      let data = ctx.request.all()
+      let transaction 
+      // const collectionRef = await collection(connector,'Transactions');
+      var decodedd
+      
+      jsonwebtoken.verify(data.token,
+      Env.get('SEMOA_API_KEY') , async(err, decoded) => {
+        if (err) {
+          console.error('Error decoding token:', err);
+
+          decodedd = err;
+        } else {
+         // console.log('Decoded token:', decoded);
+          const collectionRef =  query(collection(connector,'Transactions'),
+          where('command_id','>=',decoded.merchant_reference),
+        );
+
+      const querySnapshot = await getDocs(collectionRef)
+
+      querySnapshot.forEach((doc) => {
+         transaction = doc.data()
+         transaction.id = doc.id
+      });
+      console.log(transaction)
+      const transacRef = doc(connector, "Transactions", transaction.id);
+          decodedd = decoded 
+          console.log('decodedd',decoded.state)
+         await updateDoc(transacRef,{
+          state: decoded.state
+        })
+        }
+      })
+
+      
+      
+      return {message: decodedd}
+        
+      
 
     }
 
