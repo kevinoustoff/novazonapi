@@ -141,14 +141,13 @@ export default class TransactionController {
       let data = ctx.request.all()
       let transaction 
       // const collectionRef = await collection(connector,'Transactions');
-      var decodedd
+      
       
       jsonwebtoken.verify(data.token,
       Env.get('SEMOA_API_KEY') , async(err, decoded) => {
         if (err) {
           console.error('Error decoding token:', err);
 
-          decodedd = err;
         } else {
          // console.log('Decoded token:', decoded);
           const collectionRef =  query(collection(connector,'Transactions'),
@@ -163,7 +162,7 @@ export default class TransactionController {
       });
       console.log(transaction)
       const transacRef = doc(connector, "Transactions", transaction.id);
-          decodedd = decoded 
+          
           console.log('decodedd',decoded.state)
          await updateDoc(transacRef,{
           state: decoded.state
