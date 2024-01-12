@@ -33,7 +33,7 @@ export default class SemoaService{
                 },
             });
             // Assuming response.data contains JWT data
-            JWTService.loadJWT(response.data);
+            JWTService.loadJWT(response.data,'jwt.txt');
 
             return response.data.access_token;
         }
@@ -42,6 +42,35 @@ export default class SemoaService{
             return 
         }
       
+    }
+
+    async authSemoaPro(){
+        const formData = new URLSearchParams();
+        formData.append('grant_type', Env.get('SEMOA_PRO_GRANT_TYPE'));
+        formData.append('client_id', Env.get('SEMOA_PRO_CLIENT_ID'));
+        formData.append('client_secret', Env.get('SEMOA_PRO_CLIENT_SECRET'));
+        formData.append('username', Env.get('SEMOA_PRO_USERNAME'));
+        formData.append('password', Env.get('SEMOA_PRO_PASSWORD'));
+        formData.append('scopes', Env.get('SEMOA_PRO_SCOPE'));
+
+        fetch(Env.get('SEMOA_PRO_APIURL')+'/token', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formData,
+          })
+            .then(response => response.json())
+            .then(data => {
+              console.log('Token response:', data);
+              JWTService.loadJWT(data,'jwtSemoa.txt');
+              
+            })
+            .catch(error => {
+              console.error('Error fetching token:', error);
+            });
+
+            return 'everyone' 
     }
 
 

@@ -90,9 +90,9 @@ export default class TransactionController {
     
         const collectionRef = await collection(connector,'Transactions');
         let dataSend ;
-
+        let res = await addDoc(collectionRef, data)
         dataSend = {
-          merchant_reference :  data.command_id,
+          merchant_reference :  `TRANSAC-${res.id}`,
           amount : data.amount,
           gateway_id : data.gateway_id,
           callback_url: Env.get('NOVAZON_API')+'/transactions/callback',
@@ -103,7 +103,7 @@ export default class TransactionController {
           }
         }
 
-        let res = await addDoc(collectionRef, data)
+        
 
         let semoa = new SemoaService();
 
@@ -119,6 +119,7 @@ export default class TransactionController {
         console.log('semoaAns',semoaAns)
 
         updateDoc(transacRef,{
+          reference:`TRANSAC-${res.id}`,
           bill_url: semoaAns.bill_url,
           payment_reference: semoaAns.merchant_reference,
           payment_methods: semoaAns.payments_method,
@@ -151,7 +152,7 @@ export default class TransactionController {
         } else {
          // console.log('Decoded token:', decoded);
           const collectionRef =  query(collection(connector,'Transactions'),
-          where('command_id','>=',decoded.merchant_reference),
+          where('reference','>=',decoded.merchant_reference),
         );
 
       const querySnapshot = await getDocs(collectionRef)
@@ -176,6 +177,14 @@ export default class TransactionController {
         
       
 
+    }
+
+    public async sendCash(ctx: HttpContextContract){
+      let data = ctx.request.all()
+
+      let semoaPro = new SemoaService()
+
+      semoaPro.authSemoaPro();
     }
 
 

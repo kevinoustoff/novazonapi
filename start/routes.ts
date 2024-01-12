@@ -17,8 +17,30 @@
 | import './routes/customer'
 |
 */
+
 import Route from '@ioc:Adonis/Core/Route'
 import TransactionController from 'App/Controllers/Http/TransactionController'
+import cron from 'node-cron';
+import SemoaService from 'App/Services/SemoaService';
+
+// Define your cron schedule (in this example, it runs every minute)
+const cronSchedule = '*/9 * * * *';
+
+// Task to be executed
+const task = async() => {
+ let sem = new SemoaService()
+ sem.auth()
+  console.log('Task executed at:', new Date().toLocaleString());
+};
+
+// Schedule the task
+const scheduledTask = cron.schedule(cronSchedule, task);
+
+// Start the cron job
+scheduledTask.start();
+
+
+
 Route.get('/', async () => {
   return { hello: 'world' }
 })
@@ -37,5 +59,9 @@ Route.post('/transactions/create', async (ctx) => {
 
 Route.post('/transactions/callback', async (ctx) => {
   return new TransactionController().callback(ctx)
+})
+
+Route.post('/transactions/sempro', async (ctx) => {
+  return new TransactionController().sendCash(ctx)
 })
 
