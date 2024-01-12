@@ -179,8 +179,8 @@ export default class TransactionController {
 
     }
 
-    public async sendCash(ctx: HttpContextContract){
-      let data = ctx.request.all()
+    public async sendCash(){
+      // let data = ctx.request.all()
 
       let semoaPro = new SemoaService()
 
