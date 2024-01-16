@@ -109,6 +109,8 @@ export default class TransactionController {
 
         let sem;
 
+        let top = FirebaseService.generateRandomTopic()
+
        sem = await semoa.createTransaction(
           dataSend
         );
@@ -124,7 +126,8 @@ export default class TransactionController {
           payment_reference: semoaAns.merchant_reference,
           payment_methods: semoaAns.payments_method,
           code: semoaAns.code,
-          payment_order_reference: semoaAns.order_reference
+          payment_order_reference: semoaAns.order_reference,
+          topic: top
         })
               
         return {
@@ -132,7 +135,8 @@ export default class TransactionController {
                 "payment_link": semoaAns.bill_url,
                 "payment_action": semoaAns.payments_method[0].action,
                 "payment_method": semoaAns.payments_method[0].method,
-                "payment_order_reference": semoaAns.order_reference
+                "payment_order_reference": semoaAns.order_reference,
+                "topic": top
               }
     }
 
@@ -142,8 +146,6 @@ export default class TransactionController {
       let data = ctx.request.all()
       let transaction 
       // const collectionRef = await collection(connector,'Transactions');
-      
-      
       jsonwebtoken.verify(data.token,
       Env.get('SEMOA_API_KEY') , async(err, decoded) => {
         if (err) {
@@ -163,19 +165,26 @@ export default class TransactionController {
       });
       console.log(transaction)
       const transacRef = doc(connector, "Transactions", transaction.id);
-          
+      
+     
           console.log('decodedd',decoded.state)
          await updateDoc(transacRef,{
           state: decoded.state
         })
+        FirebaseService.sendMessageSocket({reference: transaction.reference,transacState: transaction.state},transaction.topic)
         }
       })
-
+     
       
       
       return {message: "success"}
         
       
+
+    }
+
+    public generateTopic()
+    {
 
     }
 
@@ -185,6 +194,8 @@ export default class TransactionController {
       let semoaPro = new SemoaService()
 
       semoaPro.authSemoaPro();
+
+
     }
 
 

@@ -36,6 +36,8 @@
     "@adonisjs/repl": "^3.1.11",
     "axios": "^1.6.2",
     "firebase": "^10.7.1",
+    "firebase-admin": "^12.0.0",
+    "firebase-messaging": "^1.0.6",
     "got": "^14.0.0",
     "jsonwebtoken": "^9.0.2",
     "node-cron": "^3.0.3",
