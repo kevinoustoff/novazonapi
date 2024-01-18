@@ -138,7 +138,8 @@ export default class TransactionController {
           code: semoaAns.code,
           payment_order_reference: semoaAns.order_reference,
           topic: top,
-          created_at: new Date()
+          created_at: new Date(),
+          state: null
         })
               
         return {
