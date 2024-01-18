@@ -165,9 +165,9 @@ export default class TransactionController {
           console.error('Error decoding token:', err);
 
         } else {
-         // console.log('Decoded token:', decoded);
+         console.log('Decoded token:', decoded);
           const collectionRef =  query(collection(connector,'Transactions'),
-          where('reference','>=',decoded.merchant_reference),
+          where('reference','==',decoded.merchant_reference),
         );
 
       const querySnapshot = await getDocs(collectionRef)
