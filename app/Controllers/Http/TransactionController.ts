@@ -180,7 +180,7 @@ export default class TransactionController {
       const transacRef = doc(connector, "Transactions", transaction.id);
       
           console.log('decodedd',decoded.state)
-         await updateDoc(transacRef,{
+        updateDoc(transacRef,{
           updated_at: new Date(),
           state: decoded.state
         })
