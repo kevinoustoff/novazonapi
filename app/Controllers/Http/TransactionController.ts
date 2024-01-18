@@ -137,7 +137,8 @@ export default class TransactionController {
           payment_methods: (data.gateway_id != undefined || data.gateway_id != null )?semoaAns.payments_method[0]:null,
           code: semoaAns.code,
           payment_order_reference: semoaAns.order_reference,
-          topic: top
+          topic: top,
+          created_at: new Date()
         })
               
         return {
@@ -179,6 +180,7 @@ export default class TransactionController {
       
           console.log('decodedd',decoded.state)
          await updateDoc(transacRef,{
+          updated_at: new Date(),
           state: decoded.state
         })
         // FirebaseService.sendMessageSocket({reference: transaction.reference,transacState: transaction.state},transaction.topic)
