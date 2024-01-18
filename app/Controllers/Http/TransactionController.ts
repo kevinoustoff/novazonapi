@@ -134,7 +134,7 @@ export default class TransactionController {
           reference:`TRANSAC-${res.id}`,
           bill_url: semoaAns.bill_url,
           payment_reference: semoaAns.merchant_reference,
-          payment_methods: (data.gateway_id != undefined || data.gateway_id != null )?semoaAns.payments_method:null,
+          payment_methods: (data.gateway_id != undefined || data.gateway_id != null )?semoaAns.payments_method[0]:null,
           code: semoaAns.code,
           payment_order_reference: semoaAns.order_reference,
           topic: top
