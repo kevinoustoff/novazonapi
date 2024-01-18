@@ -94,7 +94,7 @@ export default class TransactionController {
         dataSend = {
           merchant_reference :  `TRANSAC-${res.id}`,
           amount : data.amount,
-          gateway_id : data.gateway_id,
+          gateway_id : (data.gateway_id != undefined || data.gateway_id != null )?data.gateway_id: null,
           callback_url: Env.get('NOVAZON_API')+'/transactions/callback',
           client : {
             firstname : data.client_firstname,
@@ -120,11 +120,21 @@ export default class TransactionController {
 
         console.log('semoaAns',semoaAns)
 
+        // console.log('print your transaction', {
+        //   reference:`TRANSAC-${res.id}`,
+        //   bill_url: semoaAns.bill_url,
+        //   payment_reference: semoaAns.merchant_reference,
+        //   payment_methods: semoaAns.payments_method,
+        //   code: semoaAns.code,
+        //   payment_order_reference: semoaAns.order_reference,
+        //   topic: top
+        // })
+        // console.log("hello",semoaAns.payments_method)
         updateDoc(transacRef,{
           reference:`TRANSAC-${res.id}`,
           bill_url: semoaAns.bill_url,
           payment_reference: semoaAns.merchant_reference,
-          payment_methods: semoaAns.payments_method,
+          payment_methods: (data.gateway_id != undefined || data.gateway_id != null )?semoaAns.payments_method:null,
           code: semoaAns.code,
           payment_order_reference: semoaAns.order_reference,
           topic: top
@@ -133,8 +143,8 @@ export default class TransactionController {
         return {
                 "message": "Transaction ok",
                 "payment_link": semoaAns.bill_url,
-                "payment_action": semoaAns.payments_method[0].action,
-                "payment_method": semoaAns.payments_method[0].method,
+                "payment_action": (data.gateway_id != undefined || data.gateway_id != null )?semoaAns.payments_method[0].action:null,
+                "payment_method": (data.gateway_id != undefined || data.gateway_id != null )?semoaAns.payments_method[0].method: null,
                 "payment_order_reference": semoaAns.order_reference,
                 "topic": top
               }
@@ -142,6 +152,7 @@ export default class TransactionController {
 
 
     public async callback(ctx: HttpContextContract){
+      console.log('callback arrivé')
       const connector = FirebaseService.connector();
       let data = ctx.request.all()
       let transaction 
@@ -166,12 +177,11 @@ export default class TransactionController {
       console.log(transaction)
       const transacRef = doc(connector, "Transactions", transaction.id);
       
-     
           console.log('decodedd',decoded.state)
          await updateDoc(transacRef,{
           state: decoded.state
         })
-        FirebaseService.sendMessageSocket({reference: transaction.reference,transacState: transaction.state},transaction.topic)
+        // FirebaseService.sendMessageSocket({reference: transaction.reference,transacState: transaction.state},transaction.topic)
         }
       })
      

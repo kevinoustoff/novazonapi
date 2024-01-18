@@ -3,11 +3,8 @@ export default class JWTService{
 
 
     static async loadJWT(response,filePath){
-        
         const fs = require('fs');
         // File path
-       
-
         // Writing to a file
        await  fs.writeFile(filePath, response.access_token, (err) => {
         if (err) {

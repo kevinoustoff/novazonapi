@@ -70,10 +70,21 @@ export default class FirebaseService {
     
     var admin = require("firebase-admin");
 
-    var serviceAccount = require("./nova.json");
-
     admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: admin.credential.cert({
+      "type": Env.get("FIREBASE_SERVICE_TYPE"),
+      "project_id": Env.get("FIREBASE_PROJECT_ID"),
+      "private_key_id": Env.get("FIREBASE_PRIVATE_KEY_ID"),
+      "private_key": Env.get("FIREBASE_PRIVATE_KEY"),
+      "client_email": Env.get("FIREBASE_CLIENT_EMAIL"),
+      "client_id": Env.get("FIREBASE_CLIENT_ID"),
+      "auth_uri": Env.get("FIREBASE_AUTH_URI"),
+      "token_uri": Env.get("FIREBASE_TOKEN_URI"),
+      "auth_provider_x509_cert_url": Env.get("FIREBASE_AUTH_PROVIDER_X509_CERT_URL"),
+      "client_x509_cert_url": Env.get("FIREBASE_CLIENT_X509_CERT_URL"),
+      "universe_domain": Env.get("GOOGLE_UNIVERSE_DOMAIN")
+    }
+    ),
     databaseURL: "https://nova-b6a7f-default-rtdb.europe-west1.firebasedatabase.app"
     });
 

@@ -15,6 +15,7 @@ export default class SemoaService{
         this.username = Env.get('SEMOA_USERNAME')
     }
 
+    
     async auth() {
         let data = {
             password: this.password,
@@ -150,4 +151,8 @@ export default class SemoaService{
         
         return pay
     }
+
+    // async createOrderSemPro(data){
+
+    // }
 }

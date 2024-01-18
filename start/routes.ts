@@ -30,6 +30,7 @@ const cronSchedule = '*/9 * * * *';
 const task = async() => {
  let sem = new SemoaService()
  sem.auth()
+ sem.authSemoaPro()
   console.log('Task executed at:', new Date().toLocaleString());
 };
 
