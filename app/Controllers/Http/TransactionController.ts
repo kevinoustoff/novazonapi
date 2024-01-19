@@ -184,7 +184,7 @@ export default class TransactionController {
           updated_at: new Date(),
           state: decoded.state
         })
-        FirebaseService.sendMessageSocket({reference: transaction.reference,transacState: transaction.state},transaction.topic)
+        FirebaseService.sendMessageSocket({reference: transaction.reference,transacState: decoded.state},transaction.topic)
         }
       })
      
