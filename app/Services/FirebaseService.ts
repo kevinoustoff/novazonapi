@@ -88,10 +88,6 @@ export default class FirebaseService {
         databaseURL: "https://nova-b6a7f-default-rtdb.europe-west1.firebasedatabase.app"
         });
     }
-    
-
-    topic = 'news';
-
     // Create a message payload
     const payload = {
     data: message
