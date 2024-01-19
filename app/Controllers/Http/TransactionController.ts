@@ -176,15 +176,15 @@ export default class TransactionController {
          transaction = doc.data()
          transaction.id = doc.id
       });
-      console.log(transaction)
+      console.log("la transaction sur laquelle il tombe",transaction)
       const transacRef = doc(connector, "Transactions", transaction.id);
       
-          console.log('decodedd',decoded.state)
+        console.log('decodedd',decoded.state)
         updateDoc(transacRef,{
           updated_at: new Date(),
           state: decoded.state
         })
-        // FirebaseService.sendMessageSocket({reference: transaction.reference,transacState: transaction.state},transaction.topic)
+        FirebaseService.sendMessageSocket({reference: transaction.reference,transacState: transaction.state},transaction.topic)
         }
       })
      
