@@ -17,11 +17,11 @@ export default class JWTService{
        
     }
 
-    static async  readToken(){
+    static async  readToken(file){
         // write here code to read token in the file
         const fs = require('fs');
         try {
-            const token = await fs.readFileSync('jwt.txt', 'utf8');
+            const token = await fs.readFileSync(file, 'utf8');
             return token;
         } catch (err) {
             console.error('Error reading token:', err);

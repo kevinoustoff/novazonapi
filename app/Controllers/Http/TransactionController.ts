@@ -1,4 +1,3 @@
-
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Env from '@ioc:Adonis/Core/Env'
 import FirebaseService from 'App/Services/FirebaseService'
@@ -7,6 +6,7 @@ import { doc, collection ,updateDoc,addDoc, query,where,getDocs} from 'firebase/
 import SemoaService from 'App/Services/SemoaService'
 import SemoaServiceTransac from 'App/Interfaces/SemoaCreateTransac';
 import jsonwebtoken from'jsonwebtoken';
+import SemoaProCreate from 'App/Interfaces/SemoaProCreate'
 
 export default class TransactionController {
     public async index() {
@@ -84,31 +84,24 @@ export default class TransactionController {
       
       */
       let data = ctx.request.all()
-       
-
-        const connector = FirebaseService.connector();
-    
-        const collectionRef = await collection(connector,'Transactions');
-        let dataSend ;
-        let res = await addDoc(collectionRef, data)
-        dataSend = {
-          merchant_reference :  `TRANSAC-${res.id}`,
-          amount : data.amount,
-          gateway_id : (data.gateway_id != undefined || data.gateway_id != null )?data.gateway_id: null,
-          callback_url: Env.get('NOVAZON_API')+'/transactions/callback',
-          client : {
-            firstname : data.client_firstname,
-            lastname:   data.client_lastname,
-            phone:      data.client_phone
-          }
+      const connector = FirebaseService.connector();
+      const collectionRef = await collection(connector,'Transactions');
+      let dataSend ;
+      let res = await addDoc(collectionRef, data)
+      dataSend = {
+        merchant_reference :  `TRANSAC-${res.id}`,
+        amount : data.amount,
+        gateway_id : (data.gateway_id != undefined || data.gateway_id != null )?data.gateway_id: null,
+        callback_url: Env.get('NOVAZON_API')+'/transactions/callback',
+        client : {
+          firstname : data.client_firstname,
+          lastname:   data.client_lastname,
+          phone:      data.client_phone
         }
-
-        
+      }
 
         let semoa = new SemoaService();
-
         let sem;
-
         let top = FirebaseService.generateRandomTopic()
 
        sem = await semoa.createTransaction(
@@ -130,7 +123,7 @@ export default class TransactionController {
         //   topic: top
         // })
         // console.log("hello",semoaAns.payments_method)
-        updateDoc(transacRef,{
+        await updateDoc(transacRef,{
           reference:`TRANSAC-${res.id}`,
           bill_url: semoaAns.bill_url,
           payment_reference: semoaAns.merchant_reference,
@@ -187,13 +180,7 @@ export default class TransactionController {
         FirebaseService.sendMessageSocket({reference: transaction.reference,transacState: decoded.state},transaction.topic)
         }
       })
-     
-      
-      
       return {message: "success"}
-        
-      
-
     }
 
     public generateTopic()
@@ -201,12 +188,35 @@ export default class TransactionController {
 
     }
 
-    public async sendCash(){
-      // let data = ctx.request.all()
+    public async sendCash(ctx: HttpContextContract){
+       let data = ctx.request.all()
 
       let semoaPro = new SemoaService()
+      const connector = FirebaseService.connector();
+      const collectionRef = await collection(connector,'Transactions');
+      
+      let res = await addDoc(collectionRef, data)
+      data.reference = `TRANSAC-${res.id}`
+      data.type = 'REPAYMENT'
+     let send = {
+        "recipient": data.phone_number,
+        "amount": data.amount,
+        "service": data.service,
+        "thirdPartyReference":  data.reference,
+        "callbackUrl": Env.get('NOVAZON_API')+'/transactions/callback/repayment'
+      }
 
-      semoaPro.authSemoaPro();
+     let  semRe= await semoaPro.createOrderSemPro(send)
+      let semRes = <SemoaProCreate>semRe?.data
+      const transacRef = doc(connector, "Transactions", res.id);
+      await updateDoc(transacRef,{
+        reference:`TRANSAC-${res.id}`,
+        type:'REPAYMENT',
+        state: semRes.state.label
+      })
+    console.log(semRes)
+      
+      return {message: 'ok'}
 
 
     }

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Env from '@ioc:Adonis/Core/Env'
 import JWTService from './JWTService'
-
+import { v4 as uuidv4 } from 'uuid';
 export default class SemoaService{
     private password;
     private client_id;
@@ -80,7 +80,7 @@ export default class SemoaService{
         let url = `${Env.get('SEMOA_BASE_URL')}gateways`
         console.log(url)
         try{
-            let token = await JWTService.readToken()
+            let token = await JWTService.readToken('jwt.txt')
             console.log('ligne 47:', token)
             let response = await axios.get(url, {
                 headers: {
@@ -104,7 +104,7 @@ export default class SemoaService{
             pay = response.data
             console.log(error)
         } finally{
-            let token = await JWTService.readToken()
+            let token = await JWTService.readToken('jwt.txt')
             
             const response = await axios.get(url, {
                  headers: {
@@ -124,7 +124,7 @@ export default class SemoaService{
         let url = `${Env.get('SEMOA_BASE_URL')}orders`
         
         try{
-            let token = await JWTService.readToken()
+            let token = await JWTService.readToken('jwt.txt')
             
             let response = await axios.post(url, data,{
                 headers: {
@@ -152,7 +152,25 @@ export default class SemoaService{
         return pay
     }
 
-    // async createOrderSemPro(data){
+    async createOrderSemPro(data){
+        let url = `${Env.get('SEMOA_PRO_APIURL')}orders/momo`
+        
+        try{
+            let token = await JWTService.readToken('jwtSemoa.txt')
+            let response = await axios.post(url,data,{
+                headers:{
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type':'application/json',
+                    'Request-Id': uuidv4() ,
+                }
+            })
 
-    // }
+            console.log(response)
+            return response
+        } catch(error){
+            console.log(error)
+        }
+
+        
+    }
 }

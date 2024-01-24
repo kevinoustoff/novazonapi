@@ -62,7 +62,7 @@ Route.post('/transactions/callback', async (ctx) => {
   return new TransactionController().callback(ctx)
 })
 
-Route.post('/transactions/sempro', async () => {
-  return new TransactionController().sendCash()
+Route.post('/transactions/sempro', async (ctx) => {
+  return new TransactionController().sendCash(ctx)
 })
 
