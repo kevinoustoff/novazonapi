@@ -212,14 +212,15 @@ export default class TransactionController {
       const transacRef = doc(connector, "Transactions", res.id);
 
       // console.log(semRes.data)
-      
+      let topic = FirebaseService.generateRandomTopic();
       await updateDoc(transacRef,{
         reference:`TRANSAC-${res.id}`,
         type:'REPAYMENT',
-        state: semRes.state.label
+        state: semRes.state.label,
+        topic: topic
       })
       
-      return {message: 'ok'}
+      return {message: 'ok',topic:topic}
 
 
     }
