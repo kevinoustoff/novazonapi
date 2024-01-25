@@ -168,6 +168,8 @@ export default class SemoaService{
             console.log(response)
             return response
         } catch(error){
+
+            console.log(error)
             let token = await this.authSemoaPro()
             let response = await axios.post(url,data,{
                 headers:{

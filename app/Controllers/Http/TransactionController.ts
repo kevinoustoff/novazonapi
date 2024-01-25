@@ -196,6 +196,7 @@ export default class TransactionController {
       const collectionRef = await collection(connector,'Transactions');
       
       let res = await addDoc(collectionRef, data)
+    
       data.reference = `TRANSAC-${res.id}`
       data.type = 'REPAYMENT'
      let send = {
@@ -217,7 +218,6 @@ export default class TransactionController {
         type:'REPAYMENT',
         state: semRes.state.label
       })
-    console.log(semRes)
       
       return {message: 'ok'}
 
