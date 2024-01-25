@@ -209,6 +209,9 @@ export default class TransactionController {
      let  semRe= await semoaPro.createOrderSemPro(send)
       let semRes = <SemoaProCreate>semRe?.data
       const transacRef = doc(connector, "Transactions", res.id);
+
+      // console.log(semRes.data)
+      
       await updateDoc(transacRef,{
         reference:`TRANSAC-${res.id}`,
         type:'REPAYMENT',
