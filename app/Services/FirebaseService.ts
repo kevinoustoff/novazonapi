@@ -94,7 +94,7 @@ export default class FirebaseService {
     };
 
     // Send the message to the topic
-    admin.messaging().sendToTopic(topic, payload)
+    await admin.messaging().sendToTopic(topic, payload)
     .then((response) => {
         console.log('Successfully sent message:', response);
     })
