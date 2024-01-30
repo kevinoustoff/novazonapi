@@ -66,7 +66,7 @@ export default class FirebaseService {
     return messaging;
   }
 
-  static sendMessageSocket(message, topic) {
+  static async sendMessageSocket(message, topic)  {
     
     var admin = require("firebase-admin");
     if (!admin.apps.length) {
