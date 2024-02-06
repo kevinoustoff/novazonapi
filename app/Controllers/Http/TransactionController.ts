@@ -220,7 +220,7 @@ export default class TransactionController {
         topic: topic
       })
       
-      return {message: 'ok',topic:topic}
+      return {message: 'ok',topic:topic, reference: `TRANSAC-${res.id}`}
 
 
     }
