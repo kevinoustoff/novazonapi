@@ -189,7 +189,7 @@ export default class TransactionController {
     }
 
     public async sendCash(ctx: HttpContextContract){
-       let data = ctx.request.all()
+      let data = ctx.request.all()
 
       let semoaPro = new SemoaService()
       const connector = FirebaseService.connector();
