@@ -194,19 +194,16 @@ export default class TransactionController {
       let semoaPro = new SemoaService()
       const connector = FirebaseService.connector();
       const collectionRef = await collection(connector,'Transactions');
-      
       let res = await addDoc(collectionRef, data)
-    
       data.reference = `TRANSAC-${res.id}`
       data.type = 'REPAYMENT'
-     let send = {
+      let send = {
         "recipient": data.phone_number,
         "amount": data.amount,
         "service": data.service,
         "thirdPartyReference":  data.reference,
         "callbackUrl": Env.get('NOVAZON_API')+'/transactions/callback/repayment'
       }
-
      let  semRe= await semoaPro.createOrderSemPro(send)
       let semRes = <SemoaProCreate>semRe?.data
       const transacRef = doc(connector, "Transactions", res.id);
@@ -220,12 +217,8 @@ export default class TransactionController {
         topic: topic
       })
       
-      return {message: 'ok',topic:topic, reference: `TRANSAC-${res.id}`}
+      return {message: 'ok',topic:topic, reference: res.id}
 
 
     }
-
-
-
-
 }
