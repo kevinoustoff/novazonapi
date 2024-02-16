@@ -218,7 +218,8 @@ export default class TransactionController {
         type:'REPAYMENT',
         state: semRes.state.label,
         topic: topic,
-        orderReferenceSemoaPro: semRes.orderReference
+        orderReferenceSemoaPro: semRes.orderReference,
+        created_at: new Date()
       })
       
       return {message: 'ok',topic:topic, reference: res.id}
