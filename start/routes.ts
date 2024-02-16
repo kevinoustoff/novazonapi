@@ -24,13 +24,13 @@ import cron from 'node-cron';
 import SemoaService from 'App/Services/SemoaService';
 
 // Define your cron schedule (in this example, it runs every minute)
-const cronSchedule = '*/9 * * * *';
+const cronSchedule = '*/2 * * * *';
 
 // Task to be executed
 const task = async() => {
  let sem = new SemoaService()
- sem.auth()
- sem.authSemoaPro()
+ //sem.auth()
+  await sem.authSemoaPro()
   console.log('Task executed at:', new Date().toLocaleString());
 };
 
@@ -64,5 +64,9 @@ Route.post('/transactions/callback', async (ctx) => {
 
 Route.post('/transactions/sempro', async (ctx) => {
   return new TransactionController().sendCash(ctx)
+})
+
+Route.post('/transactions/callback/repayment', async (ctx) => {
+  return new TransactionController().callbackSemPro(ctx)
 })
 

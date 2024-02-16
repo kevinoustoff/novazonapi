@@ -65,7 +65,6 @@ export default class SemoaService{
             .then(data => {
               console.log('Token response:', data);
               JWTService.loadJWT(data,'jwtSemoa.txt');
-              
             })
             .catch(error => {
               console.error('Error fetching token:', error);
@@ -117,7 +116,7 @@ export default class SemoaService{
         console.log(pay)
         return pay
     }
-
+     
 
     async createTransaction(data){
         let pay = []
@@ -151,36 +150,39 @@ export default class SemoaService{
         
         return pay
     }
-
+    
     async createOrderSemPro(data){
         let url = `${Env.get('SEMOA_PRO_APIURL')}orders/momo`
-        
         try{
+            let uuid = uuidv4() 
+            //console.log('uuid1',uuid);
             let token = await JWTService.readToken('jwtSemoa.txt')
+            console.log(token)
             let response = await axios.post(url,data,{
                 headers:{
                     'Authorization': `Bearer ${token}`,
                     'Content-Type':'application/json',
-                    'Request-Id': uuidv4() ,
+                    'Request-Id': uuid,
                 }
             })
-
             console.log(response)
             return response
         } catch(error){
             console.log(error)
-            let token = await this.authSemoaPro()
+            let uuid2 = uuidv4() 
+            //console.log('uuid2',uuid2)
+            
+            let tokeni = await this.authSemoaPro()
+            
             let response = await axios.post(url,data,{
                 headers:{
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${tokeni}`,
                     'Content-Type':'application/json',
-                    'Request-Id': uuidv4() ,
+                    'Request-Id': uuid2 ,
                 }
             })
             return response
             
-        }
-
-        
+        } 
     }
 }

@@ -190,10 +190,11 @@ export default class TransactionController {
 
     public async sendCash(ctx: HttpContextContract){
       let data = ctx.request.all()
-
       let semoaPro = new SemoaService()
+      
       const connector = FirebaseService.connector();
       const collectionRef = await collection(connector,'Transactions');
+      
       let res = await addDoc(collectionRef, data)
       data.reference = `TRANSAC-${res.id}`
       data.type = 'REPAYMENT'
@@ -204,21 +205,54 @@ export default class TransactionController {
         "thirdPartyReference":  data.reference,
         "callbackUrl": Env.get('NOVAZON_API')+'/transactions/callback/repayment'
       }
-     let  semRe= await semoaPro.createOrderSemPro(send)
+     
+     try{
+      let  semRe= await semoaPro.createOrderSemPro(send)
+     
       let semRes = <SemoaProCreate>semRe?.data
       const transacRef = doc(connector, "Transactions", res.id);
 
-      // console.log(semRes.data)
       let topic = FirebaseService.generateRandomTopic();
       await updateDoc(transacRef,{
         reference:`TRANSAC-${res.id}`,
         type:'REPAYMENT',
         state: semRes.state.label,
-        topic: topic
+        topic: topic,
+        orderReferenceSemoaPro: semRes.orderReference
       })
       
       return {message: 'ok',topic:topic, reference: res.id}
-
-
+     } catch(error){
+        console.log(error)
+     }
+      
     }
-}
+
+    public async callbackSemPro(ctx: HttpContextContract){
+      console.log('callback arrivé')
+      const connector = FirebaseService.connector();
+      let data = ctx.request.all()
+      let transaction 
+      
+      const collectionRef =  query(collection(connector,'Transactions'),
+      where('orderReferenceSemoaPro','==',data.orderReference))
+      const querySnapshot = await getDocs(collectionRef)
+
+      querySnapshot.forEach((doc) => {
+        transaction = doc.data()
+        transaction.id = doc.id
+      });
+      const transacRef = doc(connector, "Transactions", transaction.id);
+        updateDoc(transacRef,{
+          updated_at: new Date(),
+          state: data.state.label,
+          totalRecords : data.totalRecords    
+        })
+          await FirebaseService.sendMessageSocket({reference: transaction.reference,transacState: data.state.label},transaction.topic)
+          return {message: "success"}  
+        } 
+  }
+
+
+         
+    
