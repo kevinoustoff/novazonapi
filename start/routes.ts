@@ -24,7 +24,7 @@ import cron from 'node-cron';
 import SemoaService from 'App/Services/SemoaService';
 
 // Define your cron schedule (in this example, it runs every minute)
-const cronSchedule = '*/2 * * * *';
+const cronSchedule = '*/5 * * * *';
 
 // Task to be executed
 const task = async() => {
